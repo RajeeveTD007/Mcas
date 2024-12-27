@@ -1,0 +1,25 @@
+# Install necessary libraries
+!pip install gTTS IPython
+
+# Import required libraries
+from gtts import gTTS
+from IPython.display import Audio
+
+# Define a function to generate audio from text
+def text_to_audio(text, lang='en', slow=False):
+    try:
+        tts = gTTS(text=text, lang=lang, slow=slow)
+        filename = "output.mp3"
+        tts.save(filename)
+        return filename
+    except Exception as e:
+        print("Error generating audio:", e)
+        return None
+
+# Example usage
+text = "Hello! This is a text-to-audio example using Python."
+audio_file = text_to_audio(text)
+
+# Play the generated audio
+if audio_file:
+    display(Audio(audio_file, autoplay=True))
